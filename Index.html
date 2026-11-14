@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP GAME PRO 24/7 - Acc Ngon & Nạp Thẻ Siêu Tốc</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        .gaming-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .gaming-glow {
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.3);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] min-h-screen text-gray-100 flex flex-col justify-between">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="bg-[#111827]/90 backdrop-blur-md sticky top-0 z-50 border-b border-red-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center gaming-glow">
+                    <i class="fa-solid fa-gamepad text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="gaming-font text-xl sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-amber-400">
+                        SHOP GAME PRO
+                    </h1>
+                    <p class="text-xs text-gray-400 font-semibold tracking-widest uppercase">Uy Tín - Nhanh Chóng - 24/7</p>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <button onclick="switchTab('home')" class="nav-btn text-red-400 hover:text-red-300 transition py-2 border-b-2 border-red-500" data-target="home">Trang Chủ</button>
+                <button onclick="switchTab('accounts')" class="nav-btn text-gray-300 hover:text-red-400 transition py-2 border-b-2 border-transparent" data-target="accounts">Kho Acc Game</button>
+                <button onclick="switchTab('topup')" class="nav-btn text-gray-300 hover:text-red-400 transition py-2 border-b-2 border-transparent" data-target="topup">Nạp Thẻ / Nạp Game</button>
+                <button onclick="switchTab('history')" class="nav-btn text-gray-300 hover:text-red-400 transition py-2 border-b-2 border-transparent" data-target="history">Lịch Sử GD</button>
+            </nav>
+
+            <!-- User Auth & Admin Button -->
+            <div class="flex items-center space-x-3">
+                <div id="admin-menu-container"></div>
+                <div id="auth-container">
+                    <button onclick="openLoginModal()" class="bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-semibold px-4 py-2 rounded-xl shadow-lg transition flex items-center space-x-2 text-sm">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span class="hidden sm:inline">Đăng Nhập Gmail</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE NAV BOTTOM BAR -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-[#111827] border-t border-red-900/40 z-40 flex justify-around py-3 text-xs">
+        <button onclick="switchTab('home')" class="mobile-nav text-red-500 flex flex-col items-center" data-target="home">
+            <i class="fa-solid fa-house text-lg"></i><span>Trang chủ</span>
+        </button>
+        <button onclick="switchTab('accounts')" class="mobile-nav text-gray-400 flex flex-col items-center" data-target="accounts">
+            <i class="fa-solid fa-store text-lg"></i><span>Mua Acc</span>
+        </button>
+        <button onclick="switchTab('topup')" class="mobile-nav text-gray-400 flex flex-col items-center" data-target="topup">
+            <i class="fa-solid fa-wallet text-lg"></i><span>Nạp Thẻ</span>
+        </button>
+        <button onclick="switchTab('history')" class="mobile-nav text-gray-400 flex flex-col items-center" data-target="history">
+            <i class="fa-solid fa-receipt text-lg"></i><span>Lịch sử</span>
+        </button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full pb-20 md:pb-12">
+
+        <!-- TAB 1: HOME (PROFILE SHOP) -->
+        <div id="tab-home" class="tab-content space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-red-950 via-gray-900 to-slate-900 border border-red-600/30 p-8 sm:p-12 shadow-2xl">
+                <div class="absolute right-0 top-0 bottom-0 w-1/3 opacity-20 hidden lg:block bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000');"></div>
+                <div class="relative z-10 max-w-2xl space-y-4">
+                    <span class="bg-red-600/20 text-red-400 border border-red-500/30 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">🔥 Hệ Thống Tự Động 24/7</span>
+                    <h2 class="gaming-font text-3xl sm:text-5xl font-black text-white leading-tight">
+                        CHUYÊN ACC GAME & NẠP THẺ <span class="text-red-500">SIÊU TỐC</span>
+                    </h2>
+                    <p class="text-gray-300 text-sm sm:text-base">
+                        Chuyên cung cấp tài khoản Liên Quân, Free Fire, Valorant, Genshin Impact trắng thông tin giá rẻ. Nạp thẻ chiết khấu cao, nạp UID 30 giây uy tín tuyệt đối!
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('accounts')" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2">
+                            <i class="fa-solid fa-cart-shopping"></i><span>Xem Kho Acc Ngay</span>
+                        </button>
+                        <a href="https://zalo.me/0933454413" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2">
+                            <i class="fa-solid fa-comment-dots"></i><span>Chat Zalo (0933.454.413)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Contacts & Info Box -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-900/80 border border-gray-800 rounded-2xl p-6 flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Bảo Hành Trọn Đời</h3>
+                        <p class="text-sm text-gray-400">Acc trắng thông tin 100%, đúng mô tả.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900/80 border border-gray-800 rounded-2xl p-6 flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Giao Dịch Tự Động 30s</h3>
+                        <p class="text-sm text-gray-400">Nhận thông tin nick hoặc nạp game siêu tốc.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900/80 border border-gray-800 rounded-2xl p-6 flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-white">Hỗ Trợ 24/7</h3>
+                        <p class="text-sm text-gray-400">Hotline/Zalo: 0933.454.413 trực liên tục.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotline Bar -->
+            <div class="bg-gradient-to-r from-red-900/40 to-slate-900 border border-red-600/30 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl animate-pulse">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg">Cần tư vấn trực tiếp hoặc khiếu nại?</h4>
+                        <p class="text-gray-400 text-sm">Liên hệ ngay số điện thoại / Zalo chính chủ của shop:</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="tel:0933454413" class="bg-red-600 hover:bg-red-700 text-white font-bold px-5 py-3 rounded-xl shadow transition">
+                        📞 0933.454.413
+                    </a>
+                    <a href="https://zalo.me/0933454413" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-3 rounded-xl shadow transition">
+                        💬 Zalo Chat
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: ACCOUNTS SHOP -->
+        <div id="tab-accounts" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="gaming-font text-2xl sm:text-3xl font-black text-white">🎮 KHO ACC GAME CHẤT LƯỢNG</h2>
+                    <p class="text-sm text-gray-400">Chọn tựa game bạn muốn sở hữu tài khoản VIP giá rẻ.</p>
+                </div>
+                <!-- Game Filters -->
+                <div class="flex flex-wrap gap-2" id="game-filters">
+                    <button onclick="filterGame('all')" class="game-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-red-600 text-white transition" data-game="all">Tất Cả</button>
+                    <button onclick="filterGame('lien-quan')" class="game-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 transition" data-game="lien-quan">Liên Quân</button>
+                    <button onclick="filterGame('free-fire')" class="game-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 transition" data-game="free-fire">Free Fire</button>
+                    <button onclick="filterGame('valorant')" class="game-filter-btn px-4 py-2 rounded-xl text-sm font-bold bg-gray-800 text-gray-300 hover:bg-gray-700 transition" data-game="valorant">Valorant</button>
+                </div>
+            </div>
+
+            <!-- Grid Accounts -->
+            <div id="accounts-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will inject account cards here -->
+            </div>
+        </div>
+
+        <!-- TAB 3: TOPUP & RECHARGE -->
+        <div id="tab-topup" class="tab-content hidden space-y-8 max-w-3xl mx-auto">
+            <div class="text-center space-y-2">
+                <h2 class="gaming-font text-2xl sm:text-3xl font-black text-white">💳 NẠP THẺ & NẠP GAME TỰ ĐỘNG</h2>
+                <p class="text-sm text-gray-400">Đổi thẻ cào chiết khấu tốt nhất hoặc nạp gói game trực tiếp qua UID.</p>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+                <div class="flex border-b border-gray-800 pb-4">
+                    <button onclick="switchTopupSub('card')" id="sub-btn-card" class="flex-1 pb-2 font-bold text-red-500 border-b-2 border-red-500 text-center">Đổi Thẻ Cào</button>
+                    <button onclick="switchTopupSub('uid')" id="sub-btn-uid" class="flex-1 pb-2 font-bold text-gray-400 border-b-2 border-transparent text-center">Nạp Gói / UID Game</button>
+                </div>
+
+                <!-- Form Card Exchange -->
+                <div id="topup-card-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Chọn Nhà Mạng</label>
+                        <select id="card-network" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                            <option value="viettel">Viettel (Chiết khấu 15%)</option>
+                            <option value="mobifone">Mobifone (Chiết khấu 18%)</option>
+                            <option value="vinaphone">Vinaphone (Chiết khấu 18%)</option>
+                            <option value="zing">Zing Card (Chiết khấu 12%)</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Mệnh Giá Thẻ</label>
+                            <select id="card-amount" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                                <option value="50000">50.000 VNĐ</option>
+                                <option value="100000">100.000 VNĐ</option>
+                                <option value="200000">200.000 VNĐ</option>
+                                <option value="500000">500.000 VNĐ</option>
+                                <option value="1000000">1.000.000 VNĐ</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Mã Thẻ (PIN)</label>
+                            <input type="text" id="card-pin" placeholder="Nhập mã thẻ cào" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Số Serial Thẻ</label>
+                        <input type="text" id="card-serial" placeholder="Nhập số serial" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                    </div>
+                    <button onclick="submitCardExchange()" class="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">
+                        Gửi Thẻ Đổi Ngay
+                    </button>
+                </div>
+
+                <!-- Form UID Recharge -->
+                <div id="topup-uid-form" class="space-y-4 hidden">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Chọn Tựa Game</label>
+                        <select id="uid-game" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                            <option value="lien-quan">Liên Quân Mobile (Quân Huy)</option>
+                            <option value="free-fire">Free Fire (Kim Cương)</option>
+                            <option value="roblox">Roblox (Robux)</option>
+                            <option value="genshin">Genshin Impact (Genesis Crystal)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Nhập UID / ID Nhân Vật</label>
+                        <input type="text" id="uid-number" placeholder="Nhập chính xác UID game của bạn" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1">Chọn Gói Nạp</label>
+                        <select id="uid-package" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500">
+                            <option value="100000">Gói 100.000 VNĐ</option>
+                            <option value="200000">Gói 200.000 VNĐ</option>
+                            <option value="500000">Gói 500.000 VNĐ</option>
+                            <option value="1000000">Gói 1.000.000 VNĐ</option>
+                        </select>
+                    </div>
+                    <button onclick="submitUidRecharge()" class="w-full bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition">
+                        Thanh Toán & Nạp UID Ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: TRANSACTION HISTORY -->
+        <div id="tab-history" class="tab-content hidden space-y-6 max-w-4xl mx-auto">
+            <div>
+                <h2 class="gaming-font text-2xl sm:text-3xl font-black text-white">📜 LỊCH SỬ GIAO DỊCH CỦA BẠN</h2>
+                <p class="text-sm text-gray-400">Danh sách các đơn mua acc, đổi thẻ và nạp game đã thực hiện.</p>
+            </div>
+
+            <div class="bg-gray-900 border border-gray-800 rounded-3xl overflow-hidden shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-800/60 text-gray-400 text-xs uppercase tracking-wider">
+                                <th class="p-4">Mã Giao Dịch</th>
+                                <th class="p-4">Loại Giao Dịch</th>
+                                <th class="p-4">Chi Tiết</th>
+                                <th class="p-4">Số Tiền</th>
+                                <th class="p-4">Trạng Thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body" class="divide-y divide-gray-800 text-sm">
+                            <!-- Javascript injected history rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="history-empty" class="p-12 text-center text-gray-500">
+                    <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                    <p>Chưa có lịch sử giao dịch nào hoặc bạn chưa đăng nhập.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: ADMIN PANEL (ONLY FOR checongthanh33@gmail.com) -->
+        <div id="tab-admin" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-red-950/40 border border-red-600/30 p-6 rounded-3xl">
+         
